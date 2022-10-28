@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body background="https://prmceam.ac.in/wp-content/uploads/2017/05/background-learner1.jpg">
+    <div class="center">
+        <h3>Sign In</h3>
+        <p>Use your account for sign in.</p>
+        <div class="txt_field">
+            <form>
+                <input type="email" placeholder="Enter email" required>
+                <input type="password" placeholder="Enter password" required>
+                <button type="submit">Sign In</button>
+                <div class="signup_link">
+                    No account? <a href="/signup">Create one</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--Css Part-->
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 300px;
+    background: white; 
+}
+.txt_field input{
+    width: 100%;
+    margin: 5px;
+    border: 1px solid;
+    padding: 10px;
+}
+.center h3{
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 0;
+    margin-top: 8%;
+}
+p{
+    text-align: center;
+}
+.center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+.txt_field button{
+    width: 100%;
+    background: blue;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+.signup_link{
+    margin: 20px 0;
+    text-align: center;
+    font-size: 16px;
+}
