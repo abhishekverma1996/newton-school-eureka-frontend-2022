@@ -1,0 +1,34 @@
+<!--HTML Part-->
+
+<!DOCTYPE html>
+<html>
+<body>
+    <form action="">
+        <button type="button" class="even" id="btn" onclick="countnow()">Click me</button>
+    </form>
+    <div id="text">
+        You have clicked the button 0 times.
+    </div>
+</body>
+</html>
+
+<!--CSS Part-->
+
+.odd{
+    color: red ;
+}
+
+.even{
+    color: blue;
+}
+
+<!-- JavaScript-->
+var count=0;
+var data = document.getElementById("text");
+var btn = document.getElementById("btn");
+function countnow(){
+    count=count+1;
+data.innerHTML ='You have clicked the button '+ count +' times.';
+count%2===0 ? btn.classList.replace("odd","even") : btn.classList.replace("even","odd");
+
+}
