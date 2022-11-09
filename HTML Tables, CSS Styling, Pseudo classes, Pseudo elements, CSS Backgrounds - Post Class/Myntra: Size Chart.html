@@ -1,3 +1,5 @@
+<!-------- HTML PART ---------->
+
 <table>
     <thead>
             <th>Part</th>
@@ -8,7 +10,7 @@
             <th>XL</th>
       </thead>
       <tbody>
-          <tr>
+          <tr id="td1">
            <td>Waist</td>
              <td>25</td>
               <td>28</td>
@@ -16,7 +18,7 @@
               <td>31</td>
               <td>32</td>
            </tr>
-           <tr>
+           <tr id="td2">
                <td>Chest</td>
                <td>34</td>
                <td>34</td>
@@ -24,7 +26,7 @@
               <td>40</td>
               <td>41</td>
           </tr>
-          <tr>
+          <tr id="td3">
                 <td>Sleeve</td>
                 <td>23</td>
                 <td>24</td>
@@ -34,3 +36,27 @@
             </tr>
             </tbody>
     </table>
+
+
+<!-------- CSS PART ---------->
+
+table,th,td{
+    border: 1px solid black;
+}
+table{
+    width: 100%;
+}
+thead{
+    background-color: rgb(186,57,57);
+    color: white;
+}
+#td1{
+    background-color: rgb(234,106,106);
+    color: white;
+}
+#td2{
+    background-color: rgb(225,187,187);
+}
+#td3{
+    background-color: gainsboro;
+}
