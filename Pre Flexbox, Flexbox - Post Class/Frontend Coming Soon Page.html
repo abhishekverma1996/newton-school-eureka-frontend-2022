@@ -1,0 +1,137 @@
+<!--- HTML PART ----->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="./styles.css" rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="card-box" id="box">
+        <div class="info">
+            <h4>BASE <br /> APPAREL</h4>
+            <div class="title" id="title">
+                WE'RE <br />
+                <span id="coming-soon">
+                    COMING <br />
+                    SOON
+                </span>
+            </div>
+            <p>
+                Hello fellow shoppers! We're currently building our new <br /> fashion store. Add your email below to
+                stay
+                up-to-date with<br /> announcements and our launch deals.
+            </p>
+            <div class="d-flex email">
+                <input type="text" placeholder="Email Address" id="input">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+            </div>
+        </div>
+            <div class="image">
+            <img src="https://res.cloudinary.com/dxayftnxb/image/upload/v1579716447/hero-desktop_ce8lgg.jpg" id="image" alt="image.com"
+                >
+            </div>
+    </div>
+
+</body>
+
+</html>
+
+
+
+<!---- CSS PART ---->
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+
+body {
+  background-image: url(https://i.pinimg.com/736x/50/69/61/5069613b363dc9f5c0bc4c9824ab26b7--background-hd-wallpaper-wallpaper-pc.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  /* height: 100%; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+
+
+}
+.card-box {
+  background-color: rgb(255, 255, 255, 0.8);
+  margin-top: 15vh;
+  height: 400px;
+  width: 1000px;
+  display: flex;
+  margin-bottom: 55px;
+ 
+
+}
+.card-box img {
+width: 100%;
+height: auto;
+}
+.info {
+  width: 70%;
+  padding-left: 10%;
+  padding-top: 5%;
+}
+.info h4 {
+  color: rgb(245, 23, 168, 0.9);
+  margin-bottom: 5%;
+}
+.title {
+  font-size: 3rem;
+  letter-spacing: 0.8rem;
+  font-weight: 300;
+  color: rgb(250, 205, 149);
+  line-height: 3.1rem;
+}
+.title span {
+  color: black;
+  font-weight: bold;
+  font-size: 35px;
+}
+.info p {
+  padding: 2rem 0;
+}
+.email {
+  position: relative;
+  align-items: center;
+}
+.email input {
+border-radius: 8px;
+}
+.email input::placeholder {
+  padding: 2px;
+}
+.email svg {
+  
+}
+.email svg:hover {
+  background-color: rgb(239, 172, 194);
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+.image img{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 850px) {
+    
+}
+@media only screen and (max-height: 750px){
+  
+}
