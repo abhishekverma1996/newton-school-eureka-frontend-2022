@@ -1,0 +1,182 @@
+Level 1
+<!- At this step we should move water to the third column with grid-column-start property. Columns are divided by vertical lines, so we should count vertical lines to find correct cell and that cell starts after third line:
+
+grid-column-start: 3;
+
+
+Level 2
+Same idea as on the previous step, just count vertical lines and place after fifth line:
+
+grid-column-start: 5;
+
+
+Level 3
+At this level we should span water with grid-column-end property. We count vertical lines where to end water. And it is fourth line, so we should enter:
+
+grid-column-end: 4;
+
+
+Level 4
+Here we have water started after fifth vertical line, so we end it after second line and the correct answer is:
+
+grid-column-end: 2;
+
+
+Level 5
+At this level we should use negative value for the grid-column-end property that allows to count vertical lines from right to left. If want want to start water from the second vertical line from the right, we should write:
+
+grid-column-end: -2;
+
+
+Level 6
+Here we use negative value for grid-column-start property and we should remember that it starts filling from left to the right and the correct answer is third vertical line from the right:
+
+grid-column-start: -3;
+
+
+Level 7
+At this level instead of defining absolute number of vertical lines we use span keyword to show how many lines the element should span. In our case it’s two:
+
+grid-column-end: span 2;
+
+
+Level 8
+Now we span again and should write:
+
+grid-column-end: span 5;
+
+
+Level 9
+Here we use span keyword to define relative width with grid-column-start property:
+
+grid-column-start: span 3;
+
+
+Level 10
+At tenth level we use shorthand property grid-column it allows to combine properties grid-column-start and grid-column-end into one and we write here:
+
+grid-column: 4 / 6;
+
+
+Level 11
+Here we use span with shorthand property grid-column and the answer is:
+
+grid-column: 2 / span 3;
+
+
+Level 12
+At this level we use property grid-row-start for vertical positioning, it works the same way as as properties for horizontal positioning that we saw on previous levels. To pass this level we write:
+
+grid-row-start: 3;
+
+
+Level 13
+Now we use shorthand property grid-row, we count vertical lines from the top:
+
+grid-row: 3 / 6;
+
+
+Level 14
+At this level we position poison using both shorthand properties - grid-column and grid-row. We count vertical lines first and horizontal lines second:
+
+grid-column: 2;
+grid-row: 5;
+
+
+Level 15
+Now we use grid-column and grid-row with ending value. We start with grid-column: 2 / 6 and grid-row: 1 / 6:
+
+grid-column: 2 / 6;
+grid-row: 1 / 6;
+
+OR
+But we also can use span here:
+grid-column: 2 / span 4;
+grid-row: 1 / span 5;
+
+
+Level 16
+Here we learn grid-area property that combines grid-colum and grid-row together. We write grid-area, define starting row and column and then ending row and column:
+
+grid-area: 1 / 2 / 4 / 6;
+Level 16 - Variant 1
+
+Alternatively we can use span keyword when defining ending row and column:
+
+grid-area: 1 / 2 / span 3 / span 4;
+
+
+Level 17
+Here we create overlapping area with gridarea property, we use span to define ending row and column but we also could use absolute values:
+
+grid-area: 2 / 3 / span 3 / span 3;
+
+
+Level 18
+Now we meet order property, it allows to set specific order for items in grid. I all items with class .water have order equal to zero, we can set any higher value to the item poison and move it to the end of the grid:
+
+order: 1;
+
+
+Level 19
+At this level we use order property to move all elements with .poison class at the beginning and it requires negative value:
+
+order: -1;
+
+
+Level 20
+Now we learn how to create template for grid. Let’s create two columns of equal width:
+
+grid-template-columns: 50% 50%;
+
+
+Level 21
+At this level we meet repeat function. To pass the level we provide two parameters to the function - number of repetitions and width of one column:
+
+grid-template-columns: repeat(8, 12.5%);
+
+
+Level 22
+Here we can use more complex scenario with grid-template-columns property where we mix different units to create columns:
+
+grid-template-columns: 100px 3em 40%;
+
+
+Level 23
+Now we meet fractional units, to pass this level we provide 1fr for weeds and 6fr for carrots:
+
+grid-template-columns: 1fr 5fr;
+
+
+Level 24
+At this level we should create two fixed first and last columns and three columns that share space between them:
+
+grid-template-columns: 50px repeat(3, 1fr) 50px;
+
+
+Level 25
+Now we should correctly distribute space using different units. First column will have width 75 pixels and then we create two fractional columns
+
+grid-template-columns: 75px 3fr 2fr;
+
+
+Level 26
+Now we will use grid-template-rows property. There are multiple ways to pass this level, for example, we can create for rows dividing 50 pixels between them but I want to show that we can have rows of zero height, so first row will be 50 pixels, than three epmty rows and last row that takes all space that left:
+
+grid-template-rows: 50px 0 0 0 1fr;
+
+
+Level 27
+Here we will use grid-template shorthand property, we create one row of 60% height and one column of 200 pixels width:
+
+grid-template: 60% / 200px;
+
+
+Level 28
+At the last we use grid-template to create grid that has two rows - first one takes all space except 50 pixels reserved for second one and also two columns that split width as one to four:
+
+grid-template: 1fr 50px / 1fr 4fr;
+
+
+Completed
+That’s all, we mastered CSS Grid Garden!
