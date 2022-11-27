@@ -1,0 +1,66 @@
+<!--- HTML PART --->
+
+<div class="row container">
+  <h1>Styles Editor</h1>
+  <div class="col md-6 container">
+    <div class="outer">
+      <div id="main" class="main">
+        <h3>Inner Element</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col md-6">
+    <div class="form">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Left</label>
+        <input type="number" class="form-control" id="left" placeholder="Enter left in 'px'" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Top</label>
+        <input type="number" class="form-control" id="top" placeholder="Enter top in 'px'" />
+      </div>
+      <button type="button" onclick="myFunction()"  class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</div>
+
+<!--- CSS PART --->
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css');
+
+.container {
+  height: 100vh;
+}
+.outer {
+  border: 2px solid rgb(0, 0, 0);
+  background: rgb(220, 20, 60);
+  min-height: 300px;
+  margin-top: 50px !important;
+  margin: auto;
+  position: relative;
+}
+h1 {
+  text-align: center;
+}
+.main {
+  min-height: 50px;
+  width: 150px;
+  background: rgb(0, 255, 255);
+  border: 2px solid rgb(0, 0, 0);
+  position: absolute;
+}
+
+.form {
+  margin-top: 50px;
+}
+
+
+<!--- JS PART --->
+
+function myFunction(){
+    var work = document.getElementById("main");
+    var leftei = document.getElementById("left").value;
+    var topei = document.getElementById("top").value;
+    work.style.left = `${leftei}px`;
+    work.style.top = `${topei}px`;
+}
