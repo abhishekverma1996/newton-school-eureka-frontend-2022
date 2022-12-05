@@ -1,0 +1,193 @@
+<!--- HTML PART--->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f51b.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <title>Converter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center">Converter</h1>
+      <div class="container row align-items-center" style="justify-content: center">
+        <div class="input col-md-4">
+          <h3 class="label">From</h3>
+          <select class="form-select col select" id="inputFormat" aria-label="Default select example">
+            <option value="4" selected>Hexadecimal</option>
+            <option value="3">Decimal</option>
+            <option value="2">Octal</option>
+            <option value="1">Binary</option>
+          </select>
+          <div class="mb-3">
+            <textarea class="form-control" id="input" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="col buttons">
+          <button type="button" onclick="swap()" class="btn btn-primary swap">Swap</button>
+          <button type="button" onclick="submit()" class="btn btn-primary submit">Submit</button>
+        </div>
+
+        <div class="output col-md-4">
+          <h3 class="label">To</h3>
+          <select class="form-select col select" id="outputFormat" aria-label="Default select example">
+            <option value="4">Hexadecimal</option>
+            <option value="3" selected>Decimal</option>
+            <option value="2">Octal</option>
+            <option value="1">Binary</option>
+          </select>
+          <div class="mb-3">
+            <textarea class="form-control" id="output" rows="2" readonly></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+<!--- CSS PART --->
+#header{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 10px;
+    margin-top: 10px;
+
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+
+/* a:hover{
+
+    color:white ;
+} */
+
+body{
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2;
+    text-align: center;
+  
+}
+
+#box{
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 7px;
+    display: inline-block;
+    margin-top: 75px;
+}
+.main{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+.form-row{
+    display: flex;
+    
+}
+.form-col{
+    margin-left: 15px;
+}
+#unit1, #unit2{
+    border-width: 2px;;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    background-clip: padding-box;
+}
+
+
+#y{
+    text-align: center;
+    padding-top: 10px;
+    display:right;
+    color: #D9D9D9;
+}
+
+#x{
+
+    text-align: center;
+    padding: 5px;
+    display:flex;
+
+
+}
+button{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #0C38EA;
+    color:#E7E9F4;
+    font-size: 20px;
+}
+
+
+<!--- JS PART --->
+function submit() {
+  var inputFormat = parseInt(document.getElementById('inputFormat').value);
+  var outputFormat = parseInt(document.getElementById('outputFormat').value);
+  var input = document.getElementById('input').value;
+  var output;
+  if (input == '') {
+    output = 'Input Required';
+  } else if (inputFormat == outputFormat) {
+    ouptut = input;
+  } else {
+    output = format(input, inputFormat, outputFormat);
+  }
+  document.getElementById('output').value = output;
+}
+function swap() {
+  var inputFormat = document.getElementById('inputFormat').value;
+  var outputFormat = document.getElementById('outputFormat').value;
+  document.getElementById('inputFormat').value = outputFormat;
+  document.getElementById('outputFormat').value = inputFormat;
+}
+function format(input, inputFormat, outputFormat) {
+  var temp, output;
+  switch (inputFormat) {
+    case 1:
+      temp = parseInt(input, 2);
+      break;
+    case 2:
+      temp = parseInt(input, 8);
+      break;
+    case 3:
+      temp = parseInt(input, 10);
+      break;
+    case 4:
+      temp = parseInt(input, 16);
+      break;
+  }
+  switch (outputFormat) {
+    case 1:
+      output = temp.toString(2);
+      break;
+    case 2:
+      output = temp.toString(8);
+      break;
+    case 3:
+      output = temp.toString(10);
+      break;
+    case 4:
+      output = temp.toString(16);
+      break;
+  }
+  return output;
+}
+
+
