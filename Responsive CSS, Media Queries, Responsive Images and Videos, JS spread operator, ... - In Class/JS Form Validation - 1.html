@@ -1,0 +1,108 @@
+<!--- HTML PART --->
+<h1>Phone Survey Form</h1>
+    <form onsubmit="handleSubmit(event)">
+        <label for="age">Your age</label>
+        <input type="number" id="q_age" min="0" oninput="ageChange(event)" value="0">
+        <br>
+        <label for="q_owns_phone">Do you own a phone</label>
+        <input type="checkbox" id="q_owns_phone">
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="errors-holder"></div>
+    <div id="result-holder"></div>
+
+
+<!--- CSS PART ---->
+/* css code goes here */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+.calculator {
+    padding: 10px;
+    border-radius: 1em;
+    height: 380px;
+    width: 400px;
+    margin: auto;
+    background-color: #191b28;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+#input {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #dcdbe1;
+    border: solid black 0.5px;
+    color: black;
+    border-radius: 5px;
+    width: 100%;
+    height: 65%;
+}
+#clr {
+    background-color: #fb0066;
+    padding: 0.2rem;
+    margin-right: 8px;
+}
+#ans {
+    background-color: #fb0066;
+}
+input[type=button] {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #64278f;
+    color: white;
+    border: solid black 0.5px;
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    outline: none;
+    padding: 0.2rem;
+}
+input:active[type=button] {
+    background: #e5e5e5;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+    height: 100%;
+}
+
+
+<!---- JS PART ---->
+function ageChange(e) {
+    let age = document.getElementById('q_age').value;
+    let checkbox = document.getElementById('q_owns_phone').checked;
+
+    if (age < 5) {
+        document.getElementById('errors-holder').innerHTML = "You need to be atleast 5 years old to participate";
+        document.getElementsByTagName('button')[0].disabled = true;
+    } else {
+        document.getElementById('errors-holder').innerHTML = " ";
+    }
+    if (age == 0) {
+        document.getElementById('errors-holder').innerHTML = "Please choose age";
+        document.getElementsByTagName('button')[0].disabled = true;
+    }
+
+    if (checkbox == true && age > 5 && age < 13) {
+        document.getElementById('result-holder').innerHTML = "You are too young to have a phone";
+        document.getElementsByTagName('button')[0].disabled = false;
+
+    }
+    if (checkbox == true && age > 5 && age > 13) {
+        document.getElementById('result-holder').innerHTML = "Use your phone in moderation";
+        document.getElementsByTagName('button')[0].disabled = false;
+
+    }
+    if (checkbox == false && age > 5 && age < 13) {
+        document.getElementById('result-holder').innerHTML = "You will get a phone soon";
+        document.getElementsByTagName('button')[0].disabled = false;
+
+    }
+    if (checkbox == false && age > 5 && age > 13) {
+        document.getElementById('result-holder').innerHTML = "You should get a phone";
+        document.getElementsByTagName('button')[0].disabled = false;
+
+    }
+}
+
+function handleSubmit(e) {
+    e.preventDefault();
+    ageChange(e);
+}
