@@ -1,0 +1,70 @@
+<!--- HTML PART ---->
+<!-- html code goes here -->
+<html>
+<body>
+     <div class="container">
+          <header>
+               <h1 id="heading">Online Notepad</h1>
+               <div class="checkbox-container">
+                    <label for="feature-flag">Save My Notes</label>
+                    <input type="checkbox" id="feature-flag">
+               </div>
+          </header>
+          <textarea id="textarea" placeholder="Write your notes here"></textarea>
+     </div>
+</body>
+</html>
+
+<!--- CSS PART --->
+/* css code goes here */
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body{
+     height: 100vh;
+     width: 100vw;
+     display: grid;
+     place-content: center;
+}
+.container{
+     width: 70vw;
+     height: 80vh;
+}
+header{
+     width: 100%;
+     height: 40px;
+     background-color: #ddd;
+     padding: 5px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+.checkbox-container{
+     display: flex;
+     align-items: center;
+     gap: 5px;
+}
+#textarea{
+     width: 100%;
+     padding: 5px;
+     height: calc(100% - 40px);
+}
+
+<!--- JS PART --->
+// javascript code goes here
+const textArea = document.getElementById('textarea');
+const featureFlag = document.getElementById('feature-flag');
+(function getDataFromStorage(){
+     let data = localStorage.getItem('autosave-data');
+     textArea.value = data;
+})()
+featureFlag.addEventListener('change', () => {
+     let autoSave;
+     if(featureFlag.checked){
+          autoSave = setInterval(() => {
+               localStorage.setItem('autosave-data', textArea.value);
+          }, 1000);
+     }else clearInterval(autoSave);
+})
