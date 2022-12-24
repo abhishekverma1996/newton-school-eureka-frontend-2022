@@ -1,0 +1,66 @@
+<!---- HTML PART ---->
+<div id="max-sum-holder">
+        Input max sum:-
+        <input type="number" value="50" onchange="maxSumChange(event)" />
+    </div>
+    <div id="range-a-holder">
+        <input type="range" onchange="rangeAChange(event)" value="0" max="0">
+        <span id="range-a-value">0</span>
+    </div>
+    <div id="range-b-holder">
+        <input type="range" onchange="rangeBChange(event)" value="50" max="50" />
+        <span id="range-b-value">50</span>
+    </div>
+    <div id="sum">
+        50
+    </div>
+
+
+<!--- JS PART --->
+const selectors = {
+            input: {
+                a: '#range-a-holder input',
+                b: '#range-b-holder input',
+                max: '#max-sum-holder input'
+            },
+            value: {
+                a: '#range-a-value',
+                b: '#range-b-value',
+                sum:'#sum'
+            }
+        }
+function maxSumChange(e){
+    setMax(selectors.input.b,getMax()-getRangeAValue())
+    setMax(selectors.input.a,getMax()-getRangeBValue())
+}
+function getInputValue(selector) {
+    return document.querySelector(selector).value
+}
+function getMax() {
+    return getInputValue(selectors.input.max)
+}
+function getRangeAValue() {
+    return getInputValue(selectors.input.a)
+}
+function getRangeBValue() {
+    return getInputValue(selectors.input.b)
+}
+function setSum(){
+    document.querySelector(selectors.value.sum).innerText = parseInt(getRangeAValue()) +parseInt(getRangeBValue())
+}
+function setMax(selector, val) {
+    document.querySelector(selector).max = val
+}
+function rangeAChange(e) {
+    const vd = document.querySelector(selectors.value.a)
+    vd.innerText = e.target.value
+    setMax(selectors.input.b,getMax()-getRangeAValue())
+    setSum()
+}
+function rangeBChange(e) {
+    const vd = document.querySelector(selectors.value.b)
+    vd.innerText = e.target.value
+    console.log(getRangeBValue());
+    setMax(selectors.input.a,getMax()-getRangeBValue())
+    setSum()
+}
