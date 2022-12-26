@@ -1,0 +1,216 @@
+<!--- HTML PART --->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f5e3-fe0f.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <title>I have to save</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center">I have to say</h1>
+      <div class="container row justify-content-center" id="data"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+<!--- CSS PART ---->
+/* css code goes here */
+body {
+  padding: 25px;
+}
+.comments {
+  max-width: 75%;
+  margin: 10px;
+}
+
+.textarea {
+  max-width: 75%;
+  margin: 10px;
+}
+
+.options {
+  position: relative;
+}
+
+.delete {
+  position: absolute;
+  right: 0;
+}
+
+.comments .comment {
+  margin-left: 2.5%;
+  margin-top: 10px;
+}
+.comments .comment .span {
+  font-weight: bolder;
+  margin-right: 10px;
+  font-size: x-large;
+}
+
+.comments .comment .reply {
+  margin-left: 5%;
+  margin-top: 10px;
+}
+
+.textarea textarea {
+  margin: 10px;
+}
+
+.textarea button {
+  margin-left: 10px;
+}
+
+.like {
+  margin-right: 15px;
+}
+
+
+<!--- JS PART ---->
+
+var Comments = JSON.parse(localStorage.getItem('Comments'));
+if (!Comments) {
+  Comments = [];
+}
+function init() {
+  var comments = document.createElement('div');
+  var textarea = document.createElement('div');
+  var input = document.createElement('textarea');
+  var header = document.createElement('h3');
+  var btn = document.createElement('button');
+  comments.className = 'comments container';
+  textarea.className = 'textarea';
+  input.className = 'form-control';
+  btn.className = 'btn btn-primary';
+  comments.id = 'comments';
+  input.id = 'text';
+  btn.onclick = () => AddComment();
+  btn.textContent = 'AddComment';
+
+  header.textContent = 'Comments.....';
+  input.placeholder = 'Enter text';
+  comments.appendChild(header);
+  for (var i = 0; i < Comments.length; i++) {
+    comments.appendChild(newComment(Comments[i]));
+  }
+  textarea.appendChild(input);
+  textarea.appendChild(btn);
+  document.getElementById('data').appendChild(comments);
+  document.getElementById('data').appendChild(textarea);
+}
+
+function newComment(data) {
+  const { text, likes, replies, idx } = data;
+  var comment = document.createElement('div');
+  var options = document.createElement('div');
+  var reply = document.createElement('div');
+  var commentTxt = document.createElement('p');
+  var replyBtn = document.createElement('button');
+  var likeBtn = document.createElement('button');
+  var deleteBtn = document.createElement('button');
+  comment.className = 'comment';
+  options.className = 'options';
+  reply.className = 'reply';
+  replyBtn.className = 'btn btn-primary addReply';
+  likeBtn.className = 'btn btn-info position-relative like';
+  deleteBtn.className = 'btn btn-primary delete';
+
+  comment.id = 'comment' + idx;
+  reply.id = 'reply' + idx;
+
+  commentTxt.innerHTML = '<p><span class="span">--></span>' + text + '</p>';
+
+  replyBtn.onclick = () => addTextarea(idx);
+  likeBtn.onclick = () => upVote(idx);
+  deleteBtn.onclick = () => Delete(idx);
+
+  replyBtn.innerHTML = 'Reply';
+  likeBtn.innerHTML = 'Upvote<span id="likeCount' + idx + '" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> ' + likes + ' </span>';
+  deleteBtn.innerHTML = 'Delete';
+  options.appendChild(likeBtn);
+  options.appendChild(replyBtn);
+  options.appendChild(deleteBtn);
+
+  replies.forEach((ele) => {
+    var replyTxt = document.createElement('p');
+    replyTxt.innerHTML = '<p><span class="span">-->></span>' + ele + '</p>';
+    reply.appendChild(replyTxt);
+  });
+
+  comment.appendChild(commentTxt);
+  comment.appendChild(options);
+  comment.appendChild(reply);
+
+  return comment;
+}
+
+function AddComment() {
+  var text = document.getElementById('text').value;
+  document.getElementById('text').value = '';
+  if (text != '') {
+    var idx = Comments.length ? Comments[Comments.length - 1].idx + 1 : 0;
+    const data = { idx: idx, text: text, likes: 0, replies: [] };
+    Comments.push(data);
+    document.getElementById('comments').appendChild(newComment(data));
+  }
+  localStorage.setItem('Comments', JSON.stringify(Comments));
+}
+function upVote(idx) {
+  var val = parseInt(document.getElementById('likeCount' + idx).innerHTML);
+  document.getElementById('likeCount' + idx).innerHTML = val + 1;
+  for (var i = 0; i < Comments.length; i++) {
+    if (Comments[i].idx === idx) {
+      Comments[i].likes++;
+      break;
+    }
+  }
+  localStorage.setItem('Comments', JSON.stringify(Comments));
+}
+function newReply(idx) {
+  var text = document.getElementById('replytext').value;
+  if (text != '') {
+    var reply = document.getElementById('reply' + idx);
+    var p = document.createElement('p');
+    p.innerHTML = '<p><span class="span">-->></span>' + text + '</p>';
+    reply.appendChild(p);
+    for (var i = 0; i < Comments.length; i++) {
+      if (Comments[i].idx === idx) {
+        Comments[i].replies.push(text);
+        break;
+      }
+    }
+    removeTextArea();
+  }
+  localStorage.setItem('Comments', JSON.stringify(Comments));
+}
+function Delete(idx) {
+  document.getElementById('comment' + idx).remove();
+
+Comments = Comments.filter((ele) => {
+
+return ele.idx != idx;
+
+});
+
+localStorage.setItem('Comments', JSON.stringify(Comments));
+}
+function addTextarea(idx) {
+  var reply = document.getElementById('reply' + idx);
+  var textArea = document.createElement('div');
+  textArea.id = 'textarea';
+  textArea.className = 'textarea';
+  textArea.innerHTML = '<textarea class="form-control" id="replytext" rows="3" placeholder="Enter text"></textarea><button type="button" class="btn btn-primary" onclick="newReply(' + idx + ')" >Post</button><button type="button" class="btn btn-primary" onclick="removeTextArea()">Cancel</button>';
+  reply.appendChild(textArea);
+}
+function removeTextArea() {
+  document.getElementById('textarea').remove();
+}
+init();
