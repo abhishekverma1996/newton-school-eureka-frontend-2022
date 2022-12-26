@@ -1,0 +1,207 @@
+<!--- HTML PART --->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="shortcut icon" type="image/png" href="notes.png" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Sticky Notes</title>
+  </head>
+  <body>
+    <div id="modal">
+      <div id="inner_modal">
+        <textarea placeholder="Note..." id="user_input"  maxlength="160"></textarea>
+        <i class="far fa-times-circle" onclick="clickHide()" id="hide"></i>
+      </div>
+    </div>
+
+    <main>
+      <header>
+        <div class="container">
+          <div id="header">
+            <h1><i class="fas fa-sticky-note"></i> Sticky Notes</h1>
+            <button id="add_note" onclick="clickAddNote()">Add Note</button>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <div class="container">
+          <div id="all_notes"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+<!---- CSS PART ---->
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  background-color: #c68c53a8;
+  font-family: 'Architects Daughter', cursive;
+}
+
+button {
+  padding: 8px;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 5px;
+  background: whitesmoke;
+  border: 1px solid lightgray;
+}
+
+button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#modal {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+#inner_modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#inner_modal textarea {
+  width: 276px;
+  height: 276px;
+  padding: 25px;
+  outline: none;
+  resize: none;
+  font-size: 1.5rem;
+  font-family: inherit;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+#inner_modal i {
+  font-size: 1.4rem;
+  color: gray;
+  cursor: pointer;
+  margin-top: -285px;
+  margin-left: -35px;
+  transition: 1s ease-in-out;
+}
+
+#inner_modal i:hover {
+  color: lightgray;
+}
+
+.container {
+  width: 1280px;
+  margin: auto;
+}
+
+#header {
+  color: white;
+  padding: 0 20px;
+  min-height: 70px;
+  text-shadow: 1px 1px black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fas {
+  color: #c2ff3d;
+}
+
+#all_notes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+
+.note {
+  width: 300px;
+  height: 300px;
+  transition: 2s;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  box-shadow: 0px 10px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+.note h1 {
+  font-size: 1.5rem;
+}
+
+.details {
+  margin-top: 25px;
+  padding: 0 15px;
+  font-size: 1.5rem;
+}
+
+.details i {
+  color: whitesmoke;
+  cursor: pointer;
+  text-shadow: 1px 1px #bbb;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  #header {
+    padding: 20px;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
+<!---- JS PART ---->
+function clickAddNote(params) {
+  document.getElementById('modal').style.display = 'block';
+}
+
+function clickHide(params) {
+  document.getElementById('modal').style.display = 'none';
+}
+
+document.getElementById('user_input').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    const text = document.getElementById('user_input').value;
+    document.getElementById('user_input').value = '';
+    document.getElementById('modal').style.display = 'none';
+    var note = document.createElement('div');
+    var details = document.createElement('div');
+    var noteText = document.createElement('h1');
+    note.className = 'note';
+    details.className = 'details';
+    noteText.innerText = text;
+
+    details.appendChild(noteText);
+    note.appendChild(details);
+    note.setAttribute('style', `margin:-5px; background-color:#c2ff3d; transform:rotate(3deg)`);
+    document.getElementById('all_notes').appendChild(note);
+  }
+});
