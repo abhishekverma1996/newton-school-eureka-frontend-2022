@@ -1,0 +1,27 @@
+<!---- HTML PART ------>
+<div id="box"  onmouseover="rotateBox()"></div>
+
+
+<!--- CSS PART ---->
+#box {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: transform 2s;
+}
+
+
+
+<!---- JS PART ---->
+// javascript code goes here
+let flag=1;
+function rotateBox(){
+if(flag == 1){
+    document.getElementById('box').style.transform = 'rotate(180deg)';
+    flag = 0;
+}
+else{
+    document.getElementById('box').style.transform = 'rotate(0deg)';
+    flag = 1;
+}
+}
