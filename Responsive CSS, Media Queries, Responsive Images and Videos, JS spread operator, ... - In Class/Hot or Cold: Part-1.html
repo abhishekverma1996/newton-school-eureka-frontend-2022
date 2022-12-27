@@ -1,0 +1,15 @@
+<!--- HTML PART --->
+<body>
+    <p id="main">
+        I am learning to generate random number. I will be able to handle randomness in any of my applications that needs it. Press the button to get a random number.
+    </p>
+    <button id="btn" onclick="displayRandomNumber()">Click Me!!</button> 
+    <p id="num"></p>
+</body>
+
+
+<!---- JS PART ---->
+// javascript code goes here
+function displayRandomNumber(min=-20, max=20){
+    document.getElementById("num").innerHTML = Math.floor(Math.random() * (max - min) + min);
+}
