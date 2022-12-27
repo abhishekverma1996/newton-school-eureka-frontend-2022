@@ -1,0 +1,19 @@
+<!--- HTML PART ---->
+<h1>I am a headline made with HTML</h1>
+<br />
+<p id="useless-paragraph">Useless paragraph.</p>
+<br />
+<button onclick="toggleVisibility()">Toggle Button</button>
+
+
+<!--- JS PART ---->
+// your js code goes here
+function toggleVisibility() {
+    let x = document.getElementById("useless-paragraph");
+
+    if(x.style.display === "none"){
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
