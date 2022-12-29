@@ -1,0 +1,56 @@
+<!---- HTML PART ---->
+<label for="paragraph-input">Enter paragraph here</label>
+    <div id="paragraph-input" contenteditable="true">Enter text here</div>
+    <br />
+    <br />
+    <div>Total matches:- <span id="words-counter">0</span></div>
+    <br />
+    <label for="word-input">Enter word to be higlighted here</label>
+    <input type="text" id="word-input" oninput="highlight()">
+    <br />
+    <br />
+    <label for="ignore-case">Ignore case?</label>
+    <input type="checkbox" id="ignore-case"  onchange="highlight()"/>
+
+
+<!--- CSS PART ---->
+#paragraph-input {
+            border: 2px solid rgb(150, 0, 0);
+            width: 400px;
+            height: 300px;
+            padding: 8px 16px;
+            overflow: scroll;
+        }
+
+        .highlighted-txt {
+            color: rgb(0, 0, 0);
+            background-color: rgb(241, 255, 45);
+        }
+
+
+<!---- JS PART ---->
+// javascript code goes here
+function highlight() {
+    const paraEl = document.querySelector('#paragraph-input')
+    const wordEl = document.querySelector('#word-input')
+    const wordCounterEl = document.querySelector('#words-counter')
+    const shouldMatchLowerCase = document.querySelector('#ignore-case').checked
+    if(!wordEl.value) return;
+    let newParaElText = ''
+    let i = 0
+    if (shouldMatchLowerCase) {
+        const reg = new RegExp(wordEl.value,'ig')
+        newParaElText = paraEl.innerText.replaceAll(reg, (args) => {
+            i++;
+            return `<span class="highlighted-txt">${args}</span>`
+        })
+    }else{
+        newParaElText = paraEl.innerText.replaceAll(wordEl.value, (args) => {
+            i++;
+            return `<span class="highlighted-txt">${args}</span>`
+        })
+    }
+
+    paraEl.innerHTML = newParaElText
+    wordCounterEl.innerText = i
+}
