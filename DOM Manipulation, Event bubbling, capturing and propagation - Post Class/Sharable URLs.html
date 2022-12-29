@@ -1,0 +1,42 @@
+<!--- HTML PART ---->
+<!-- html code goes here -->
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h3 id="url">https://localhost:8080/<span id="change"></span></h3>
+<input type="text" id="name" name="name">
+<input type="number" id="year" name="year">
+<button id="button" onclick="updateHeading()">Submit</button>
+        
+        <script src="./script.js" async defer></script>
+    </body>
+</html>
+
+
+<!---- JS PART ----->
+// javascript code goes here
+function updateHeading() {
+    let head3 = document.getElementById('url');
+    head3.innerText = 'https://localhost:8080/';
+    let fName = document.getElementById('name');
+    let year = document.getElementById('year');
+    if(fName.value === "" && year.value === "")
+        return;
+    else if(year.value === "")
+        head3.innerText += '?' + 'name=' + fName.value;
+    else if(fName.value === "")
+        head3.innerText += '?' + 'year=' + year.value;
+    else
+        head3.innerText += '?' + 'name=' + fName.value + '&year=' + year.value;
+    fName.value = "";
+    year.value = "";
+}
