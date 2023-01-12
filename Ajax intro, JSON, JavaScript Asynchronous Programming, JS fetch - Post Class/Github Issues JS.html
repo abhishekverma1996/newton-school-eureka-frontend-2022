@@ -1,0 +1,107 @@
+<!---- HTML PART ---->
+<!-- html code goes here -->
+<html>
+<body>
+
+    <div class="container">
+        <h1 id="heading">Page number 1</h1>
+        <ol id="list">
+        </ol>
+        <div class="buttons">
+             <button id="load_prev">Prev</button>
+             <button id="load_next">Next</button>
+        </div>
+   </div>
+</body>
+</html>
+
+
+
+<!---- CSS PART --->
+/* css code goes here */
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            width: 100vw;
+            background-color: #ffeaa7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            background-color: #fdcb6e;
+            width: 300px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        button{
+            color: white;
+            background-color: #55efc4;
+            padding: 10px 20px;
+            border: none;
+            margin: 50px 20px;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: #00b894;
+        }
+        h1{
+            color: #00b894;
+            margin-bottom :20px;
+        }
+
+        ol{
+            background-color: #ff7675;
+            padding: 20px 5px 20px 20px;
+        }
+        
+        
+        
+<!----- JS PART ---->
+
+// javascript code goes here
+const heading = document.getElementById('heading');
+const next = document.getElementById('load_next');
+const prev = document.getElementById('load_prev');
+const list = document.getElementById('list');
+let pageNumber = 1;
+
+
+function Issues(pageNumber) {
+    return fetch(`https://api.github.com/repositories/1296269/issues?page=${pageNumber}&per_page=5`)
+            .then(res => res.json()).then(res => res);
+
+}
+
+async function showIssues(pageNumber){
+    let issue = await Issues(pageNumber);
+    list.innerHTML = "";
+    heading.innerText = `Page number ${pageNumber}`;
+    issue.forEach(element => {
+        let li = document.createElement('li');
+        li.innerText = element.node_id;
+        list.appendChild(li);
+    });
+}
+
+showIssues(1);
+
+next.addEventListener('click', () => {
+    pageNumber++;
+    showIssues(pageNumber);
+})
+prev.addEventListener('click', () => {
+    if (pageNumber > 1) {
+         pageNumber--;
+         showIssues(pageNumber);
+    }
+})
